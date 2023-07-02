@@ -33,7 +33,8 @@ router.post('/', (req, res) => {
         name: rows[0].HumanName,
         email: rows[0].BB_HumanEmail,
         phone: rows[0].BB_HumanPhone,
-        gender: rows[0].BB_HumanGender
+        gender: rows[0].BB_HumanGender,
+        birthdate: rows[0].BB_HumanBDate,
       };
       res.status(200).json({
         message: 'User Data',

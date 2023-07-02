@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 router.post('/', (req, res) => {
-  const { id, name, email, password, phone, gender } = req.query;
+  const { id, name, email, password, phone, gender, birthdate} = req.query;
 
   // Hash the password using bcrypt
   bcrypt.hash(password, 10, (err, hashedPassword) => {
@@ -39,8 +39,8 @@ router.post('/', (req, res) => {
         res.status(400).send({message:'User is already registered'});
       } else {		
         // User is not registered, proceed with registration
-        const insertQuery = 'INSERT INTO bb_humanos (HumanID, HumanName, BB_HumanEmail, HumanPassword, BB_HumanPhone, HumanGender) VALUES (?, ?, ?, ?, ?, ?)';
-        const values = [id, name, email, hashedPassword, phone, gender];
+        const insertQuery = 'INSERT INTO bb_humanos (HumanID, HumanName, BB_HumanEmail, HumanPassword, BB_HumanPhone, HumanGender, BB_HumanBDate) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const values = [id, name, email, hashedPassword, phone, gender, birthdate];
 
         connection.query(insertQuery, values, (err, result) => {
           if (err) {
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
             	id: id,
             	name: name,
            	 	email: email,
-            	phone: phone
+            	phone: phone,
           };
 
           console.log('User registered successfully');
